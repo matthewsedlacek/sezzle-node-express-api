@@ -7,6 +7,7 @@ const pool = new Pool({
   port: 5432,
 });
 
+/* Local DB */
 const getMessages = (request, response) => {
   pool.query(
     "SELECT * FROM messages ORDER BY id DESC LIMIT 10",
@@ -32,6 +33,39 @@ const createMessage = (request, response) => {
       response.status(201).send(results.rows);
     }
   );
+};
+
+/* SOCKET DB */
+const getSocketMessages = () => {
+  return new Promise((resolve) => {
+    // could pull out into own function
+    pool.query(
+      "SELECT * FROM messages ORDER BY id DESC LIMIT 10",
+      (error, results) => {
+        if (error) {
+          throw error;
+        }
+
+        resolve(results.rows);
+      }
+    );
+  });
+};
+
+const createSocketMessage = (message) => {
+  return new Promise((resolve) => {
+    pool.query(
+      "INSERT INTO messages (msg) VALUES ($1) RETURNING msg",
+      [message],
+      (error, results) => {
+        if (error) {
+          throw error;
+        }
+
+        resolve(results.rows);
+      }
+    );
+  });
 };
 
 module.exports = {
