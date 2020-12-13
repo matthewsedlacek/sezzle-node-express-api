@@ -9,7 +9,7 @@ const { emit } = require("process");
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: "https://sezzle-calculator-chat.netlify.app/",
+    origin: "https://sezzle-calculator-chat.netlify.app",
     methods: ["GET", "POST"],
   },
 });
