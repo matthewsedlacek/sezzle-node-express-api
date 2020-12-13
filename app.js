@@ -5,6 +5,7 @@ const app = express();
 const port = 3000;
 const socketPort = 8000;
 const db = require("./queries");
+const { emit } = require("process");
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
@@ -15,6 +16,7 @@ const io = require("socket.io")(server, {
 
 app.use(cors());
 
+// parses requests for fetch
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -45,7 +47,9 @@ io.on("connection", (socket) => {
   console.log("a user connected");
 
   socket.on("chat message", (msg) => {
-    db.createSocketMessage(msg)
+    // console.log(`Is anybody out there ${msg}`);
+    // io.emit("chat message", `Hello ${msg}`);
+    db.createSocketMessage(JSON.parse(msg))
       .then((_) => {
         emitMostRecentMessges();
       })

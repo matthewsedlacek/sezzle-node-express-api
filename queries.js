@@ -24,7 +24,7 @@ const createMessage = (request, response) => {
   const { text, username } = request.body;
 
   pool.query(
-    "INSERT INTO messages (text, username) VALUES ($1, $2)",
+    "INSERT INTO messages (text, username) VALUES ($1, $2) RETURNING text, username, created_at",
     [text, username],
     (error, results) => {
       if (error) {
@@ -53,10 +53,11 @@ const getSocketMessages = () => {
 };
 
 const createSocketMessage = (message) => {
+  //   console.log(JSON.parse(message).text, "AKDSFASDKFLADSJKFSAJLFJKAF");
   return new Promise((resolve) => {
     pool.query(
-      "INSERT INTO messages (msg) VALUES ($1) RETURNING msg",
-      [message],
+      "INSERT INTO messages (text, username) VALUES ($1, $2) RETURNING text, username, created_at",
+      [message.text, message.username],
       (error, results) => {
         if (error) {
           throw error;
@@ -71,4 +72,6 @@ const createSocketMessage = (message) => {
 module.exports = {
   getMessages,
   createMessage,
+  getSocketMessages,
+  createSocketMessage,
 };
