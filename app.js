@@ -2,8 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-const port = 3000;
-const socketPort = 8000;
+// const port = 3000;
+const PORT = process.env.PORT || 8000;
 const db = require("./queries");
 const { emit } = require("process");
 const server = require("http").createServer(app);
@@ -28,9 +28,9 @@ app.use(
 //   response.json({ info: "Node.js, Express, and Postgres API" });
 // });
 
-app.listen(port, () => {
-  console.log(`App running on port ${port}.`);
-});
+// app.listen(port, () => {
+//   console.log(`App running on port ${port}.`);
+// });
 
 app.get("/messages", db.getMessages);
 app.post("/messages", db.createMessage);
@@ -61,6 +61,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(socketPort, () => {
-  console.log(`listening on *:${socketPort}`);
+server.listen(PORT, () => {
+  console.log(`listening on *:${PORT}`);
 });
