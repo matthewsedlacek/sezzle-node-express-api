@@ -16,7 +16,7 @@ Backend is hosted on [Heroku](https://serene-crag-73795.herokuapp.com/messages)
 
 ## Local Installation
 
-Database Creation
+**Database Creation**
 
 Instructions require that Homebrew is installed on your local machine. For setup instructions see [link](https://brew.sh/)
 
@@ -50,7 +50,7 @@ INSERT INTO messages (text, username)
 
 12. Database is now setup. Continue on to the GitHub section to get the Node/Express server running
 
-GitHub [Repository](https://github.com/matthewsedlacek/sezzle-calculator-socketio)
+**GitHub Repository**
 
 1. Open terminal and navigate to folder of your choice
 2. In the terminal type `git clone --single-branch --branch local https://github.com/matthewsedlacek/sezzle-node-express-api`. This will clone down the local branch.
