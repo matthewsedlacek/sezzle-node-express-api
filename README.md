@@ -28,27 +28,26 @@ Instructions require that Homebrew is installed on your local machine. For setup
 6. Connect postgres with me `psql -d postgres -U me`
 7. Create a database `CREATE DATABASE api;`
 8. Connect to new api database `\c api`
-9. Create Table in the api database
+9. Create Table in the api database using the below SQL command
 
 ```sql
-api=>
 CREATE TABLE messages (
   ID SERIAL PRIMARY KEY,
   text varchar(255) NOT NULL,
   username varchar(255) NOT NULL,
-  created_at SET DEFAULT NOW();
+  created_at TIMESTAMP NOT NULL DEFAULT now()
 );
 ```
 
 10. Set the Time Zone to UTC. Methods in frontend convert times to local of any time zone. `SET TIMEZONE='UTC';`
-11. Insert data into messages table
+11. Seed the messages table with the below SQL command
 
 ```sql
 INSERT INTO messages (text, username)
   VALUES ('1+1=2', 'matthew'), ('2+2=4', 'blake'), ('3+3=6', 'julie'), ('4+4=8', 'courtney'), ('5+5=10', 'brian'), ('6+6=12', 'michael'), ('7+7=14', 'edward'), ('1+1=2', 'matthew'), ('2+2=4', 'blake'), ('3+3=6', 'julie');
 ```
 
-12. Database is now setup. Continue on to the GitHub section to get the Node/Express server running
+12. Database is now setup and you can leave psql with `\q` in your terminal. Continue on to the GitHub section to get the Node/Express server running
 
 **GitHub Repository**
 
