@@ -24,10 +24,6 @@ app.use(
   })
 );
 
-// app.get("/", (request, response) => {
-//   response.json({ info: "Node.js, Express, and Postgres API" });
-// });
-
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });
@@ -47,8 +43,6 @@ io.on("connection", (socket) => {
   console.log("a user connected");
 
   socket.on("chat message", (msg) => {
-    // console.log(`Is anybody out there ${msg}`);
-    // io.emit("chat message", `Hello ${msg}`);
     db.createSocketMessage(JSON.parse(msg))
       .then((_) => {
         emitMostRecentMessges();
