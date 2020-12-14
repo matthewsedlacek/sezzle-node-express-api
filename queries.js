@@ -1,10 +1,5 @@
 const Pool = require("pg").Pool;
 const pool = new Pool({
-  //   user: "me",
-  //   host: "localhost",
-  //   database: "api",
-  //   password: "password",
-  //   port: 5432,
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
@@ -42,7 +37,6 @@ const createMessage = (request, response) => {
 /* SOCKET DB */
 const getSocketMessages = () => {
   return new Promise((resolve) => {
-    // could pull out into own function
     pool.query(
       "SELECT * FROM messages ORDER BY id DESC LIMIT 10",
       (error, results) => {
@@ -57,7 +51,6 @@ const getSocketMessages = () => {
 };
 
 const createSocketMessage = (message) => {
-  //   console.log(JSON.parse(message).text, "AKDSFASDKFLADSJKFSAJLFJKAF");
   return new Promise((resolve) => {
     pool.query(
       "INSERT INTO messages (text, username) VALUES ($1, $2) RETURNING text, username, created_at",

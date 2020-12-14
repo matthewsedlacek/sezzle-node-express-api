@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-// const port = 3000;
 const PORT = process.env.PORT || 8000;
 const db = require("./queries");
 const { emit } = require("process");
@@ -24,14 +23,6 @@ app.use(
   })
 );
 
-// app.get("/", (request, response) => {
-//   response.json({ info: "Node.js, Express, and Postgres API" });
-// });
-
-// app.listen(port, () => {
-//   console.log(`App running on port ${port}.`);
-// });
-
 app.get("/messages", db.getMessages);
 app.post("/messages", db.createMessage);
 
@@ -47,8 +38,6 @@ io.on("connection", (socket) => {
   console.log("a user connected");
 
   socket.on("chat message", (msg) => {
-    // console.log(`Is anybody out there ${msg}`);
-    // io.emit("chat message", `Hello ${msg}`);
     db.createSocketMessage(JSON.parse(msg))
       .then((_) => {
         emitMostRecentMessges();
