@@ -22,7 +22,7 @@ Instructions require that Homebrew is installed on your local machine. For setup
 
 1. If you have not done so already, install PostgreSQL. For Mac users type `brew install postgresql` in the terminal.
 2. Connect to the default postgres database by typing in your terminal `psql postgres`
-3. Create a user with name me and password of password `postgres=# CREATE ROLE me WITH LOGIN PASSWORD 'password';`
+3. Create a user with name me and password of password `CREATE ROLE me WITH LOGIN PASSWORD 'password';`
 4. Give me the ability to create a database `ALTER ROLE me CREATEDB;`
 5. Exit default postgres using `\q`
 6. Connect postgres with me `psql -d postgres -U me`
